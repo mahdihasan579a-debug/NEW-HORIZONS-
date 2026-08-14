@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KRAVEN DOWNLOAD HUB</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&display=swap');
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#02050a;
+    color:white;
+    font-family:'Orbitron',Arial,sans-serif;
+    min-height:100vh;
+}
+
+.container{
+    width:94%;
+    max-width:650px;
+    margin:auto;
+    padding:35px 0 50px;
+}
+
+.logo{
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:1px;
+    margin-bottom:20px;
+    color:#f1f5ff;
+}
+
+.logo span{
+    color:#3b82f6;
+}
+
+.search-box{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.search-box input{
+    flex:1;
+    height:60px;
+    border:0;
+    outline:none;
+    border-radius:30px;
+    background:#111827;
+    color:white;
+    padding:0 25px;
+    font-family:'Orbitron';
+    font-size:17px;
+    box-shadow:inset 0 0 0 1px #172236;
+}
+
+.search-box input::placeholder{
+    color:#64748b;
+}
+
+.search-btn{
+    width:65px;
+    height:60px;
+    border:0;
+    border-radius:20px;
+    background:#111827;
+    color:#3b82f6;
+    font-size:25px;
+}
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    margin-bottom:20px;
+}
+
+.categories button{
+    white-space:nowrap;
+    border:1px solid #1d2a40;
+    background:#0d1523;
+    color:#8090aa;
+    padding:10px 15px;
+    border-radius:20px;
+    font-family:'Orbitron';
+}
+
+.categories button.active,
+.categories button:hover{
+    background:#1479ff;
+    color:white;
+    border-color:#1479ff;
+}
+
+.stats{
+    display:flex;
+    justify-content:space-between;
+    color:#65748b;
+    font-size:11px;
+    margin:5px 5px 20px;
+}
+
+.apk-card{
+    background:#101927;
+    border-radius:25px;
+    padding:22px;
+    margin-bottom:20px;
+    border:1px solid #17243a;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:.25s;
+    animation:fade .5s ease;
+}
+
+.apk-card:hover{
+    transform:translateY(-3px);
+    border-color:#237fff;
+    box-shadow:0 10px 35px rgba(20,121,255,.15);
+}
+
+.apk-info{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
+
+.app-icon{
+    width:105px;
+    height:105px;
+    border-radius:8px;
+    object-fit:cover;
+    background:#182234;
+    flex-shrink:0;
+}
+
+.apk-content{
+    flex:1;
+}
+
+.apk-title{
+    font-size:21px;
+    line-height:1.25;
+    font-weight:800;
+    margin-bottom:5px;
+    color:#f8fafc;
+}
+
+.apk-description{
+    color:#8290a7;
+    font-size:14px;
+    line-height:1.4;
+}
+
+.download-btn{
+    display:block;
+    width:100%;
+    margin-top:18px;
+    padding:17px 10px;
+    text-align:center;
+    border-radius:20px;
+    background:#287ff5;
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.download-btn:hover{
+    background:#4794ff;
+    transform:scale(1.01);
+}
+
+.no-result{
+    display:none;
+    text-align:center;
+    color:#64748b;
+    padding:40px;
+}
+
+footer{
+    text-align:center;
+    color:#46546a;
+    font-size:11px;
+    margin-top:30px;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:500px){
+
+    .container{
+        width:92%;
+        padding-top:30px;
+    }
+
+    .logo{
+        font-size:28px;
+    }
+
+    .app-icon{
+        width:90px;
+        height:90px;
+    }
+
+    .apk-title{
+        font-size:17px;
+    }
+
+    .apk-description{
+        font-size:12px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <span>KRAVEN</span> DOWNLOAD HUB
+    </div>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search apps..."
+        >
+
+        <button class="search-btn">
+            🔍
+        </button>
+
+    </div>
+
+    <div class="categories">
+
+        <button
+            class="active"
+            onclick="filterCategory('All',this)">
+            ALL
+        </button>
+
+        <button
+            onclick="filterCategory('Games',this)">
+            GAMES
+        </button>
+
+        <button
+            onclick="filterCategory('Tools',this)">
+            TOOLS
+        </button>
+
+        <button
+            onclick="filterCategory('Utility',this)">
+            UTILITY
+        </button>
+
+        <button
+            onclick="filterCategory('Other',this)">
+            OTHER
+        </button>
+
+    </div>
+
+    <div class="stats">
+
+        <span>
+            APK: <b id="appCount">0</b>
+        </span>
+
+        <span>
+            DOWNLOADS: <b id="downloadCount">0</b>
+        </span>
+
+    </div>
+
+    <div id="apkList"></div>
+
+    <div id="noResult" class="no-result">
+        No apps found.
+    </div>
+
+    <footer>
+        © 2026 KRAVEN DOWNLOAD HUB
+    </footer>
+
+</div>
+
+<script>
+
+/*
+==========================================
+APK LIST
+
+PALITAN MO LANG ANG:
+name
+description
+image
+link
+==========================================
+*/
+
+let apps = [];
+
+/* GitHub RAW source */
+const GITHUB_RAW_URL =
+    "https://raw.githubusercontent.com/mahdihasan579a-debug/NEW-HORIZONS-/refs/heads/main/apps.json";
+
+async function loadAppsFromGitHub(){
+    try{
+        const response = await fetch(GITHUB_RAW_URL + "?t=" + Date.now(), {cache:"no-store"});
+        if(!response.ok) throw new Error("GitHub RAW unavailable");
+        const data = await response.json();
+        if(!Array.isArray(data)) throw new Error("apps.json must be an array");
+
+        apps = data.map(function(app){
+            return {
+                name: app.name || "Unnamed APK",
+                category: app.category || "Other",
+                description: app.description || "",
+                image: app.image || "https://via.placeholder.com/150",
+                link: app.link || "#",
+                downloads: Number(app.downloads) || 0
+            };
+        });
+        displayApps();
+    }catch(error){
+        console.error(error);
+        document.getElementById("apkList").innerHTML =
+            '<div style="text-align:center;color:#64748b;padding:40px;">Unable to load apps from GitHub RAW.<br><br>Check your GITHUB_RAW_URL and apps.json.</div>';
+        document.getElementById("appCount").textContent="0";
+        document.getElementById("downloadCount").textContent="0";
+    }
+}
+
+
+let currentCategory="All";
+
+
+/* DISPLAY APPS */
+
+function displayApps(){
+
+    let search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    let list =
+        document.getElementById("apkList");
+
+    list.innerHTML="";
+
+    let results = apps.filter(function(app){
+
+        let categoryMatch =
+            currentCategory === "All" ||
+            app.category === currentCategory;
+
+        let searchMatch =
+            app.name
+            .toLowerCase()
+            .includes(search) ||
+
+            app.description
+            .toLowerCase()
+            .includes(search);
+
+        return categoryMatch && searchMatch;
+
+    });
+
+
+    results.forEach(function(app){
+
+        let index = apps.indexOf(app);
+
+        list.innerHTML += `
+
+            <div class="apk-card">
+
+                <div class="apk-info">
+
+                    <img
+                        class="app-icon"
+                        src="${app.image}"
+                        alt="APK">
+
+                    <div class="apk-content">
+
+                        <div class="apk-title">
+                            ${app.name}
+                        </div>
+
+                        <div class="apk-description">
+                            ${app.description}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="download-btn"
+                    href="${app.link}"
+                    target="_blank"
+                    onclick="downloadAPK(${index})">
+
+                    Download
+
+                </a>
+
+            </div>
+
+        `;
+
+    });
+
+
+    document.getElementById("appCount")
+    .textContent = apps.length;
+
+
+    document.getElementById("noResult")
+    .style.display =
+        results.length === 0
+        ? "block"
+        : "none";
+
+
+    updateDownloads();
+
+}
+
+
+/* SEARCH */
+
+document
+.getElementById("search")
+.addEventListener(
+    "input",
+    displayApps
+);
+
+
+/* CATEGORY */
+
+function filterCategory(category,button){
+
+    currentCategory=category;
+
+    document
+    .querySelectorAll(".category")
+    .forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    displayApps();
+
+}
+
+
+/* DOWNLOAD COUNTER */
+
+function downloadAPK(index){
+
+    apps[index].downloads++;
+
+    localStorage.setItem(
+        "kravenApps",
+        JSON.stringify(apps)
+    );
+
+    updateDownloads();
+
+}
+
+
+function updateDownloads(){
+
+    let total=0;
+
+    apps.forEach(function(app){
+        total += app.downloads || 0;
+    });
+
+    document
+    .getElementById("downloadCount")
+    .textContent=total;
+
+}
+
+
+/* START */
+
+loadAppsFromGitHub();
+
+</script>
+
+</body>
+</html>
